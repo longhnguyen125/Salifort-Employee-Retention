@@ -101,19 +101,6 @@ survey data, making it practical for real HR deployment.
 
 ---
 
-## Repository Structure
-```
-├── HR_capstone_dataset.csv                  # Raw dataset
-├── HR_Project.ipynb                         # Analysis notebook
-├── Salifort_Motors_Executive_Summary.pptx   # Executive summary deck
-└── README.md
-```
-
----
-
 ## Tools
-Python, pandas, numpy, matplotlib, seaborn, scikit-learn, Jupyter Notebook
+Python, pandas, numpy, matplotlib, seaborn, scikit-learn
 
----
-
-*Google Advanced Data Analytics Certificate — Course 7 Capstone | 2026*
