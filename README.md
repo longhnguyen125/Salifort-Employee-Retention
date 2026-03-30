@@ -1,6 +1,8 @@
 # Salifort Motors — Employee Retention Analysis
 
 ---
+*** Throughout the project, I will using the PACE (Plan - Analyze - Construct - Execute) Framework to answer the main question.
+---
 
 ## Overview
 Salifort Motors is a fictional French-based alternative energy vehicle manufacturer.
