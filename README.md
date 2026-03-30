@@ -265,7 +265,3 @@ of them in advance**, giving HR a meaningful window to intervene.
 - **Scikit-learn** — DecisionTreeClassifier, RandomForestClassifier, GridSearchCV
 - **Jupyter Notebook**
 
----
-
-## Author
-*Google Advanced Data Analytics Certificate — Course 7 Capstone Project | 2026*
