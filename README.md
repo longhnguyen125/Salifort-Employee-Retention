@@ -1,7 +1,7 @@
 # Salifort Motors — Employee Retention Analysis
 
 ---
-*** Throughout the project, I will using the PACE (Plan - Analyze - Construct - Execute) Framework to answer the main question. ***
+***Throughout the project, I will using the PACE (Plan - Analyze - Construct - Execute) Framework to answer the main question.***
 ---
 
 ## Overview
