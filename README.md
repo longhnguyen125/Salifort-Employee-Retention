@@ -7,6 +7,8 @@ Salifort Motors is a fictional French-based alternative energy vehicle manufactu
 This project analyzes HR data to predict which employees are likely to leave and 
 identify the key factors driving turnover.
 
+---
+
 **Business Question:** *What factors are most likely to make an employee leave?*
 
 ---
@@ -22,9 +24,9 @@ identify the key factors driving turnover.
 
 ### 🟡 Plan
 The target variable `left` is binary, making this a **classification problem**.
-The goal is to build a model that predicts whether an employee will leave and 
-surface the features driving that decision. Two model families were evaluated: 
-Decision Tree and Random Forest. Success was measured by AUC, recall, and accuracy.
+The goal is to build a model that predicts whether an employee will leave and
+surface the features driving that decision. Success was measured by AUC, recall,
+and accuracy.
 
 ---
 
@@ -35,13 +37,29 @@ Decision Tree and Random Forest. Success was measured by AUC, recall, and accura
 - Identified 824 tenure outliers via IQR (bounds: 1.5 – 5.5 years)
 
 **Key EDA Findings:**
+
+**Workload & Hours**
+- Roughly **17% of employees left** — about 1 in 6 workers
 - Every employee assigned **7 projects left** — 100% attrition at max load
-- Two quitter groups: **overworked** (245–315 hrs/month, satisfaction ≈ 0) and 
-  **underworked/bored** (~150 hrs/month, satisfaction ≈ 0.4)
-- **4-year employees** had the lowest satisfaction of any tenure group
-- Very few promotions despite widespread overwork
-- High evaluation scores were almost exclusively given to **200+ hr/month workers**
-- `satisfaction_level` had the strongest correlation with leaving **(r = −0.35)**
+- The standard monthly baseline is 166.67 hrs. Nearly all employees worked
+  significantly above this — overwork is the norm, not the exception
+- Two distinct quitter groups identified:
+  - **Overworked group:** 245–315 hrs/month with near-zero satisfaction — burned out
+  - **Underworked group:** ~150 hrs/month with satisfaction ~0.4 — bored or disengaged
+
+**Tenure & Satisfaction**
+- Employees who left had a mean satisfaction score of **0.44 vs 0.67** for those
+  who stayed — a clear and significant gap
+- **4-year employees** showed the lowest satisfaction of any tenure group,
+  suggesting an unaddressed policy or culture issue at that milestone
+- Employees with **6+ years tenure rarely left** — they eventually found their footing
+
+**Promotions & Evaluations**
+- Very few employees were promoted in the last 5 years, despite widespread overwork
+- High evaluation scores were almost exclusively given to **200+ hr/month workers** —
+  effort is being measured by hours, not contribution
+- A strong correlation exists between hours worked and evaluation score,
+  creating an unfair and unsustainable standard
 
 ---
 
@@ -53,7 +71,7 @@ Decision Tree and Random Forest. Success was measured by AUC, recall, and accura
   replaced `average_monthly_hours` with binary `overworked` flag (>175 hrs = 1)
 
 **Modeling:**
-Both rounds trained Decision Tree and Random Forest using `GridSearchCV` 
+Both rounds trained Decision Tree and Random Forest using `GridSearchCV`
 with 4-fold cross-validation, optimizing for AUC.
 
 | | Round 1 | Round 2 |
@@ -64,34 +82,22 @@ with 4-fold cross-validation, optimizing for AUC.
 ---
 
 ### 🔴 Execute
-**Model Results:**
+**Recommended model: Random Forest Round 2** — does not rely on satisfaction
+survey data, making it practical for real HR deployment.
 
-| Model | Recall | Accuracy | AUC |
-|---|---|---|---|
-| Decision Tree — R1 | 91.7% | 97.2% | 0.970 |
-| Random Forest — R1 | 91.6% | 97.8% | 0.980 |
-| Decision Tree — R2 | 90.4% | 95.9% | 0.959 |
-| **★ Random Forest — R2** | **90.4%** | **96.2%** | **0.964** |
-
-**Recommended model: Random Forest Round 2** — catches 90 out of every 100 
-employees who will leave, without relying on satisfaction survey data.
-
-**Top Predictors (both models agree):**
-
-| Feature | Importance |
-|---|---|
-| `last_evaluation` | ~35% |
-| `number_project` | ~34% |
-| `tenure` | ~20% |
-| `overworked` | ~10% |
+**Key Findings:**
+- Employees are leaving due to **burnout and poor management**, not personal choice
+- The strongest predictors of turnover are **evaluation score, project count,
+  tenure, and being overworked** — department and salary barely matter
+- Workload and performance standards are the root cause, not the symptom
 
 **Recommendations:**
-1. **Cap projects at 5** — all 7-project employees left
+1. **Cap projects at 5** — all 7-project employees left; overload is the clearest signal
 2. **Review employees at year 3–4** — dissatisfaction peaks at the 4-year mark
 3. **Reward long hours or reduce workload** — most employees work above the 166 hr baseline
 4. **Reform evaluations** — high scores should not require 200+ hrs/month
-5. **Clarify overtime policies** — ambiguity drives dissatisfaction
-6. **Hold culture discussions** — burnout is systemic, not individual
+5. **Clarify overtime policies** — ambiguity around expectations drives dissatisfaction
+6. **Hold culture discussions** — burnout is a systemic problem, not an individual one
 
 ---
 
